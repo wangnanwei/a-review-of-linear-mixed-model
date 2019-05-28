@@ -1,0 +1,263 @@
+   \documentclass[12pt]{article}
+
+ \def\<{\langle}
+ \def\>{\rangle}
+ \usepackage{subfig}
+ \usepackage{listings}
+ 
+ \lstset{language=R,
+ 	basicstyle=\small\ttfamily,
+ 	stringstyle=\color{DarkGreen},
+ 	otherkeywords={0,1,2,3,4,5,6,7,8,9},
+ 	morekeywords={TRUE,FALSE},
+ 	deletekeywords={data,frame,length,as,character},
+ 	keywordstyle=\color{blue},
+ 	commentstyle=\color{DarkGreen},
+ }
+ %\usepackage{kbordermatrix}
+\usepackage[utf8x]{inputenc} 
+ \usepackage{subfig}
+ \usepackage{amssymb,amsmath,latexsym,amsthm}
+ \usepackage[colorlinks=true,linkcolor=red]{hyperref}
+ \usepackage{xcolor, colortbl}
+ \usepackage{float}
+ \usepackage{epstopdf}
+ \usepackage{color}
+ \usepackage{dsfont}
+ \usepackage{eqnarray}
+ \usepackage{multirow}
+ \usepackage{array}
+ \usepackage[authoryear]{natbib}
+ \usepackage{enumerate}
+ \usepackage{amsmath,amssymb}
+ \usepackage{graphicx,indentfirst,amsmath}
+ \usepackage{booktabs}
+ \usepackage{enumitem}
+ \usepackage{lipsum}
+ \usepackage{dsfont}
+ \usepackage{algorithm}
+ \usepackage{algorithmic}
+ \usepackage{caption}
+ \usepackage{natbib}
+ %\usepackage{subcaption}
+ \usepackage{graphics}
+ \usepackage{latexsym}
+ \usepackage{geometry}
+ \usepackage{placeins}
+ \usepackage{epsf,verbatim}
+ \usepackage{epstopdf}
+ \usepackage{multirow}
+ \usepackage{pgf,pgfarrows,pgfnodes}
+ \usepackage{tikz}
+ \usetikzlibrary{matrix,arrows,decorations.pathmorphing}
+ \usetikzlibrary{shapes,arrows}
+ \usepackage{color}
+ \usepackage{epsfig}
+ \usetikzlibrary{patterns}
+ \usetikzlibrary{shapes}
+ \usetikzlibrary{arrows}
+ \usepackage{tikz-3dplot}
+%\pdfminorversion=4
+% NOTE: To produce blinded version, replace "0" with "1" below.
+\newcommand{\blind}{1}
+
+% DON'T change margins - should be 1 inch all around.
+\addtolength{\oddsidemargin}{-.5in}%
+\addtolength{\evensidemargin}{-.5in}%
+\addtolength{\textwidth}{1in}%
+\addtolength{\textheight}{-.3in}%
+\addtolength{\topmargin}{-.8in}%
+
+ \hypersetup{
+ 	colorlinks=true,       % false: boxed links; true: colored links
+ 	linkcolor=red,          % color of internal links (change box color with linkbordercolor)
+ 	citecolor=green,        % color of links to bibliography
+ 	filecolor=magenta,      % color of file links
+ 	urlcolor=cyan,         % color of external links
+ }
+ \usepackage{cite}
+ \newcommand{\subtitle}[1]{%
+ 	\posttitle{%
+ 		\par\end{center}
+ 	\begin{center}\large#1\end{center}
+ 	\vskip0.5em}%
+}
+\def\D{\mathcal{D}}
+\def\E{\mathcal{E}}
+\def\Ecal{\mathcal{E}}
+\def\M{\mathcal{M}}
+\def\N{\mathcal{N}}
+\def\B{\mathcal{B}}
+\def\P{\mathbf{P}}
+\def\R{\mathbf{R}}
+\def\F{\mathbf{F}}
+\DeclareMathOperator{\MLE}{MLE}
+\DeclareMathOperator{\EMLE}{EMLE}
+\newcommand{\muFF}{\mu^{F\smash{'_1/F'_2}}}
+\newcommand{\hmuFF}{\hat{\mu}^{F\smash{'_1/F'_2}}}
+\newcommand{\Fbf}{\mathbf{F}}
+\newcommand{\Pbf}{\mathbf{P}}
+\newcommand{\gmle}{p_{*}}
+\newcommand{\face}{F}
+\def\C{\mathcal{C}}
+\def\J{\mathcal{J}}
+\def\t{\theta}
+\def\<{\langle}
+\def\>{\rangle}
+\newcommand\overmat[2]{\smash{%\color{white}
+	\overbrace{#2\strut}^{\text{\color{black}#1}}}}
+\def\beq{\begin{eqnarray*}}
+\def\eeq{\end{eqnarray*}}
+\def\tl{\triangleleft}
+\definecolor{LRed}{rgb}{1,.8,.8}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand\ci{\perp\!\!\!\perp}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\numberwithin{equation}{section}
+\begin{document}
+
+\def\spacingset#1{\renewcommand{\baselinestretch}%
+{#1}\small\normalsize} \spacingset{1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\if1\blind
+{
+  \title{\bf High-dimensional Bayesian Model Selection }
+  \author{Nanwei Wang\thanks{
+    The authors gratefully acknowledge \textit{please remember to list all relevant funding sources in the unblinded version}}\hspace{.2cm}\\
+    Lunenfeld-Tanenbaum Research Institute\\
+    and \\
+    Laurent Briollais \\
+    Lunenfeld-Tanenbaum Research Institute\\
+    Helene Massam\\
+    Department of Mathematics and Statistics, York Univeristy}
+  \maketitle
+} \fi
+
+\if0\blind
+{
+  \bigskip
+  \bigskip
+  \bigskip
+  \begin{center}
+    {\LARGE\bf Title}
+\end{center}
+  \medskip
+} \fi
+
+\bigskip
+\abstract
+This is a review of linear mixed models in GWAS analysis. In this review, we will explain some important mathematical concepts regards to  linear mixed models. We will mainly focus on the maximum likelihood estimation, restricted maximum likelihood estimation of linear mixed models and the various hypothesis tests in GWAS. 
+\section{Introduction}
+Given a dataset consist of N samples and p snps, denote $y$ as the continous phenotype variable; $X$ as the $n\times p$ snp matrix and $W$ as other nuisance variables including the intercept. The nuisance variables can be patients' personal information and principle components. 
+To test if one snp $X_i$ is correlated with the phenotype, we can build the following linear mixed model:
+\begin{equation}
+\label{eq:lmm}
+y=\beta_0W+\beta_i X_i+z+\epsilon,
+\end{equation}
+Where $z \sim \N(0,\sigma_g^2K)$, $K=\frac{1}{p}XX^t$ denotes the genetic relationship matrix, is the genetic variance component and $\epsilon\sim \N(0, \sigma_e^2)$ is the random error. There are two parts of the linear mixed model: $\beta_0W+\beta_i X_i$ is the fixed effects and $z+\epsilon$ is the random effects. Compared to the simple linear model, the genetic variance component $z$ accounts for sample relatedness and population stratification.  
+
+\section{Maximum likelihood estimation}
+In order to simplify the notation, we just write $X\beta$  as the fixed effects. In the linear mixed model, we can get that the phenotype $y$ follows the multivariate normal distribution $\N(X\beta,\Sigma)$, where $\Sigma=\sigma_g^2K+\sigma_e^2I_N$. The log-likelihood of the parameters $\theta=(\beta,\sigma_g,\sigma_e)$ is 
+\begin{equation}
+\label{eq:loglikelihood}
+l(\theta|y,X)=-\frac{1}{2}(n\log(2\pi)+\log |\Sigma|+(y-X\beta)^t\Sigma^{-1}(y-X\beta))
+\end{equation}
+As the covariance matrix $\Sigma$ is not diagonal, maximizing the log-likelihood function \ref{eq:loglikelihood} to compute the MLE is very difficult. To simplify the log-likelihood function, we can do a transformation of the original data and get independent samples.
+
+First, get the eigen-decomposition of matrix $K=USU^t$, where $S$ is the diagonal matrix of eigenvalues, the columns of matrix $U$is the corresponding eigenvectors. Second, transform the data: $$y^*=U^ty;\ X^*=U^tX,$$
+so we get
+\[
+\begin{array}{lcl}
+E(y^*) &=& X^*\beta;\\
+Var(y^*) &=& \sigma_g^2UKU^t+\sigma_e^2UIU^t =\sigma_g^2S+\sigma_e^2I.
+\end{array}
+\]
+Finally, we simplify the log-likelihood fucntion \ref{eq:loglikelihood}:
+\begin{equation}
+\label{eq:loglikelihood2}
+l(\theta|y^*,X^*)=-\frac{1}{2}(n\log(2\pi)+\log |\sigma_g^2S+\sigma_e^2I|+(y^*-X^*\beta)^t(\sigma_g^2S+\sigma_e^2I)^{-1}(y^*-X^*\beta).
+\end{equation} 
+Set $\delta=\frac{\sigma_e^2}{\sigma_g^2}$, the log-likelihood function can be further simplified as follows
+\begin{equation}
+\label{eq:loglikelihood3}
+l(\theta|y^*,X^*)=-\frac{1}{2}(n\log(2\pi)+n\log(\sigma_g^2)+\sum_{i=1}^n\log (S_{ii}+\delta)+\frac{1}{\sigma_g^2}(y^*-X^*\beta)^t(S+\delta I)^{-1}(y^*-X^*\beta).
+\end{equation}
+
+The score function of parameter $\beta, \sigma_g^2$ in log-likelihood function \ref{eq:loglikelihood3} is
+\[
+\begin{array}{lcl}
+S(\beta)&=& \frac{dl}{d\beta}=-\frac{1}{\sigma_g^2}(X^*)^t(S+\delta I)^{-1}(y^*-X^*\beta)\\
+S(\sigma_g^2) &=& \frac{dl}{d\sigma_g^2}=-\frac{1}{2}(\frac{n}{\sigma_g^2}-\frac{1}{\sigma_g^4}(y^*-X^*\beta)^t(S+\delta I)^{-1}(y^*-X^*\beta))
+\end{array}
+\]
+Set them to zero, we can get
+\begin{equation}
+\label{eq:bs}
+\begin{array}{lcl}
+\beta &=& ((X^*)^t(S+\delta I)^{-1}X^*)^{-1}(X^*)^t(S+\delta I)^{-1}y^*\\
+\sigma_g^2 &=& \frac{1}{n}(y^*-X^*\beta)^t(S+\delta I)^{-1}(y^*-X^*\beta))
+\end{array}
+\end{equation}
+Plug the equations \ref{eq:bs} back the to log-likelihood \ref{eq:loglikelihood3}, we can write the log-likelihood function as a one-dimensional function of parameter $\delta$. It will be easy to get the MLE of $\delta$ first, then the MLE of $\beta$ and $\delta_g$.
+
+\section{Restricted maximum likelihood estimation}
+As the MLE of the variance parameter $\sigma_g^2$ is biased, the restricted maximum likelihood estimation is used more often in the literature. We will talk more about RMLE in this review. 
+
+First,we can study a simple case: linear mixed model without fixed effect part:
+\[
+y \sim \N(0,\Sigma), \quad \text{where }\Sigma=\sigma_g^2(K+\delta I).
+\]
+The log-likelihood function is
+\[
+l(\theta|y,X)=-\frac{1}{2}(N\log(2\pi)+\log|\Sigma|+y^t\Sigma^{-1}y)
+\]
+Plug the $K=USU^t$ into the the log-likelihood function ,or equvaliently to say, perform the transformation of data: $y^*=U^ty;\ X^*=U^tX$, we can simplify the log-likelihood function:
+\[
+l(\theta|y^*,X^*)=-\frac{1}{2}(N\log(2\pi)+n\log(\sigma_g^2)+\log|S+\delta I|+\frac{1}{\sigma_g^2} (y^*)^t(S+\delta I)^{-1}y^*)
+\]
+
+The score function is 
+\[
+\begin{array}{lcl}
+S(\sigma_g^2) &=& \frac{n}{\sigma_g^2}-\frac{1}{(\sigma_g^2)^2} \sum_{i=1}^n \frac{(y_i^*)^2}{\lambda_i+\delta} \\
+S(\delta) &=& \sum_{i=1}^n \frac{1}{\lambda_i+\delta}-\frac{1}{\sigma_g^2}\sum_{i=1}^n \frac{(y_i^*)^2}{(\lambda_i+\delta)^2},
+\end{array}
+\]
+
+and the fisher information matrix is
+\[
+F=\begin{bmatrix}
+\frac{dS(\sigma_g^2)}{d \sigma_g^2} & \frac{dS(\sigma_g^2)}{d \delta} \\ \frac{dS(\delta)}{d \sigma_g^2 } &\frac{dS(\delta)}{d \delta} 
+\end{bmatrix} =
+\begin{bmatrix}
+-\frac{n}{(\sigma_g^2)^2}+\frac{2}{(\sigma_g^2)^3} \sum_{i=1}^n \frac{(y_i^*)^2}{\lambda_i+\delta} & \frac{1}{(\sigma_g^2)^2} \sum_{i=1}^n \frac{(y_i^*)^2}{\lambda_i+\delta}  \\
+\frac{1}{(\sigma_g^2)^2} \sum_{i=1}^n \frac{(y_i^*)^2}{\lambda_i+\delta}  & -\sum_{i=1}^n \frac{1}{(\lambda_i+\delta)^2}+\frac{2}{\sigma_g^2}\sum_{i=1}^n \frac{(y_i^*)^2}{(\lambda_i+\delta)^3}
+\end{bmatrix}.
+\]
+
+
+We can easily extend the above computation to linear mixed model with fixed effects. We need to find a projection matrix $A$ to transform the data such that $AX=0$. The residual matrix $R=I-X(X^tX)^{-1}X^t$. We give the following lemma about the residual matrix.
+\begin{lemma}
+\end{lemma}
+
+  we show mathematically how one can get the restricted log-likelihood function from the regular log-likelihood function. Denote $P=\Sigma^{-1}(I-X(X^t\Sigma^{-1}X)^{-1}X^t\Sigma^{-1})$ The restricted log-likelihood is
+\begin{equation}
+\label{eq:rllm}
+\begin{array}{lcl}
+l_r(\theta|X,y)&=& -\frac{1}{2}\big( (N-k)\log(2\pi)-\log|X^tX| +\log |\Sigma|+\log |X^t\Sigma^{-1} X| +y^TPy \big)\\
+\end{array}
+\end{equation}
+
+\bibliographystyle{apalike}
+\bibliography{ref}
+\end{document}
+
